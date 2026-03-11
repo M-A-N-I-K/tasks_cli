@@ -1,8 +1,8 @@
-package todos
+package tasks
 
 import (
 	"fmt"
-	"todo/cli/pkg/todos"
+	"todo/cli/pkg/tasks"
 
 	"os"
 	"text/tabwriter"
@@ -10,16 +10,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var listTodoCmd = &cobra.Command{
-    Use:   "list",
-    Aliases: []string{"list"},
-    Short:  "List all todos",
+var completedTasksCmd = &cobra.Command{
+    Use:   "complete",
+    Aliases: []string{"complete"},
+    Short:  "Returns all completed tasks",
     Args:  cobra.ExactArgs(0),
     Run: func(cmd *cobra.Command, args []string) {
 		w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, '.', tabwriter.AlignRight|tabwriter.Debug)
-        res,err := todos.ListTodo("todos.json")
+        res,err := tasks.ListTasks("tasks.json")
 		if err != nil{
-			fmt.Println("Error listing todo %w",err)
+			fmt.Println("Error listing tasks %w",err)
 		}
 		for _,todo := range res {
 			fmt.Fprintln(w,todo.ID,todo.Description,todo.CreatedAt)
@@ -29,5 +29,5 @@ var listTodoCmd = &cobra.Command{
 }
 
 func init() {
-    rootCmd.AddCommand(listTodoCmd)
+    rootCmd.AddCommand(completedTasksCmd)
 }

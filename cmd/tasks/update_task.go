@@ -1,9 +1,9 @@
-package todos
+package tasks
 
 import (
 	"fmt"
 	"strconv"
-	"todo/cli/pkg/todos"
+	"todo/cli/pkg/tasks"
 
 	"github.com/spf13/cobra"
 )
@@ -23,7 +23,7 @@ var updateTodoCmd = &cobra.Command{
 			fmt.Println("Error converting id to int : %w",err)
 		}
 		
-        res,err := todos.UpdateTodo(id,args[1],args[2] == "true")
+        res,err := tasks.UpdateTask(id,args[1],args[2] == "true")
 		if err != nil{
 			fmt.Println("Error deleting todo %w",err)
 		}

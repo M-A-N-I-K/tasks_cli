@@ -1,8 +1,9 @@
 package main
 
-import "todo/cli/cmd/todos"
+import tasks "todo/cli/cmd/tasks"
+
 
 
 func main() {
-    todos.Execute()
+    tasks.Execute()
 }

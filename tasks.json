@@ -1,11 +1,5 @@
 [
   {
-    "id": 1,
-    "description": "Buy groceries",
-    "createdAt": "2026-03-09T10:00:00Z",
-    "isComplete": false
-  },
-  {
     "id": 2,
     "description": "Learn Go",
     "createdAt": "2026-03-09T10:00:00Z",
@@ -15,6 +9,12 @@
     "id": 3,
     "description": "Complete todo cli project",
     "createdAt": "2026-03-13T10:00:00Z",
+    "isComplete": false
+  },
+  {
+    "id": 4,
+    "description": "Working on beauty part of CLI",
+    "createdAt": "2026-03-12T01:11:13.778992+05:30",
     "isComplete": false
   }
 ]
