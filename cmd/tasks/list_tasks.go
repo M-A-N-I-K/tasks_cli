@@ -7,13 +7,14 @@ import (
 	"os"
 	"text/tabwriter"
 
+	"github.com/mergestat/timediff"
 	"github.com/spf13/cobra"
 )
 
 var listTasksCmd = &cobra.Command{
     Use:   "list",
     Aliases: []string{"list"},
-    Short:  "List all tasks",
+    Short:  "List pending tasks",
     Args:  cobra.ExactArgs(0),
     Run: func(cmd *cobra.Command, args []string) {
 		w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, '.', tabwriter.AlignRight|tabwriter.Debug)
@@ -22,7 +23,8 @@ var listTasksCmd = &cobra.Command{
 			fmt.Println("Error listing tasks %w",err)
 		}
 		for _,todo := range res {
-			fmt.Fprintln(w,todo.ID,todo.Description,todo.CreatedAt)
+			createdAt := timediff.TimeDiff(todo.CreatedAt)
+			fmt.Fprintln(w,todo.ID,todo.Description,createdAt)
 		}
 
     },

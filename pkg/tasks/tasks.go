@@ -34,6 +34,32 @@ func ListTasks(filename string) ([]Task, error) {
     return tasks, nil
 }
 
+func ListPendingTasks(filename string) ([]Task, error) {
+	var tasks []Task
+
+    fileData, err := os.ReadFile(filename)
+
+    if err != nil {
+        return tasks, fmt.Errorf("failed to read file: %w", err)
+    }
+
+    err = json.Unmarshal(fileData, &tasks) 
+
+    if err != nil {
+        return tasks, fmt.Errorf("failed to unmarshal JSON: %w", err)
+    }
+
+    var pendingTasks []Task
+
+	for _ , task := range tasks {
+		if(task.IsComplete == false) {
+			pendingTasks = append(pendingTasks,task)
+		}
+	}
+
+    return pendingTasks, nil
+}
+
 func ListCompleteTasks(filename string) ([]Task, error) {
 	var tasks []Task
 
@@ -112,6 +138,28 @@ func UpdateTask(id int,description string,is_complete bool)(bool,error){
 		if task.ID == id{
 			tasks[index].Description = description
 			tasks[index].IsComplete = is_complete
+		}
+	}
+
+	jsonData, err := json.MarshalIndent(tasks, "", "  ")
+
+	err = os.WriteFile(FILE_NAME, jsonData, 0644) 
+	if err != nil {
+		fmt.Println("Error reading JSON file:", err)
+		return false , fmt.Errorf("Error writing to file: %w", err)
+	}
+	return true,nil
+}
+
+func CompleteTask(id int,)(bool,error){
+	tasks,err := ListTasks(FILE_NAME);
+	if err != nil {
+		fmt.Println("Error reading JSON file:", err)
+		return false, fmt.Errorf("failed to read file: %w", err)
+	}
+	for index , task :=range tasks{
+		if task.ID == id{
+			tasks[index].IsComplete = true
 		}
 	}
 

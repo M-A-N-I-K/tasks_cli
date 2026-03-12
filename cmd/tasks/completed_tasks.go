@@ -7,22 +7,24 @@ import (
 	"os"
 	"text/tabwriter"
 
+	"github.com/mergestat/timediff"
 	"github.com/spf13/cobra"
 )
 
 var completedTasksCmd = &cobra.Command{
-    Use:   "complete",
-    Aliases: []string{"complete"},
+    Use:   "completed",
+    Aliases: []string{"completed"},
     Short:  "Returns all completed tasks",
     Args:  cobra.ExactArgs(0),
     Run: func(cmd *cobra.Command, args []string) {
 		w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, '.', tabwriter.AlignRight|tabwriter.Debug)
-        res,err := tasks.ListTasks("tasks.json")
+        res,err := tasks.ListCompleteTasks("tasks.json")
 		if err != nil{
 			fmt.Println("Error listing tasks %w",err)
 		}
 		for _,todo := range res {
-			fmt.Fprintln(w,todo.ID,todo.Description,todo.CreatedAt)
+			createdAt := timediff.TimeDiff(todo.CreatedAt)
+			fmt.Fprintln(w,todo.ID,todo.Description,createdAt)
 		}
 
     },
