@@ -8,11 +8,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var updateTodoCmd = &cobra.Command{
-    Use:   "update",
-    Aliases: []string{"update"},
-    Short:  "Update a todo by id",
-    Args:  cobra.ExactArgs(3),
+var editTodoCmd = &cobra.Command{
+    Use:   "edit",
+    Aliases: []string{"edit"},
+    Short:  "Edit a task description by id",
+    Args:  cobra.ExactArgs(2),
     Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 2 {
             fmt.Println("Not Enough Arguments provided")
@@ -23,7 +23,7 @@ var updateTodoCmd = &cobra.Command{
 			fmt.Println("Error converting id to int : %w",err)
 		}
 		
-        res,err := tasks.UpdateTask(id,args[1],args[2] == "true")
+        res,err := tasks.UpdateTask(id,args[1])
 		if err != nil{
 			fmt.Println("Error deleting todo %w",err)
 		}
@@ -34,5 +34,5 @@ var updateTodoCmd = &cobra.Command{
 }
 
 func init() {
-    rootCmd.AddCommand(updateTodoCmd)
+    rootCmd.AddCommand(editTodoCmd)
 }

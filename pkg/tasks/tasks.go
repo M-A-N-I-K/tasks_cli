@@ -128,7 +128,7 @@ func DeleteTask(id int)(bool,error){
 	return true,nil
 }
 
-func UpdateTask(id int,description string,is_complete bool)(bool,error){
+func UpdateTask(id int,description string)(bool,error){
 	tasks,err := ListTasks(FILE_NAME);
 	if err != nil {
 		fmt.Println("Error reading JSON file:", err)
@@ -137,7 +137,6 @@ func UpdateTask(id int,description string,is_complete bool)(bool,error){
 	for index , task :=range tasks{
 		if task.ID == id{
 			tasks[index].Description = description
-			tasks[index].IsComplete = is_complete
 		}
 	}
 

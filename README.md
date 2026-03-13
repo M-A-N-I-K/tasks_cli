@@ -108,6 +108,18 @@ $ tasks complete 2
 ```
 
 ---
+### Edit Task 
+
+Allow users to modify a task description.
+```
+$ tasks edit <id> "New description"
+```
+Example:
+
+```
+$ tasks edit 3 "Buy groceries and fruits"
+```
+---
 
 ### Delete Task
 
@@ -152,15 +164,6 @@ Example:
 * `text/tabwriter` → formatted output
 * `os` → file handling
 * `github.com/mergestat/timediff` → friendly time output
-
----
-
-## Technical Notes
-
-* Tasks stored in JSON instead of CSV
-* File locking not implemented
-* Completion stored as boolean (not timestamp)
-* Due date feature not implemented
 
 ---
 
