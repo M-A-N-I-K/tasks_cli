@@ -3,12 +3,21 @@
     "id": 3,
     "description": "Complete todo cli project",
     "createdAt": "2026-03-13T10:00:00Z",
-    "isComplete": true
+    "isComplete": true,
+    "dueDate": null
   },
   {
     "id": 4,
     "description": "Enhance features in task CLI",
     "createdAt": "2026-03-12T20:56:05.915487+05:30",
-    "isComplete": false
+    "isComplete": false,
+    "dueDate": null
+  },
+  {
+    "id": 5,
+    "description": "Start new go project",
+    "createdAt": "2026-03-13T22:45:57.113053+05:30",
+    "isComplete": false,
+    "dueDate": "2026-03-29T00:00:00Z"
   }
 ]

@@ -14,6 +14,7 @@ type Task struct {
 	Description string `json:"description"`
 	CreatedAt time.Time `json:"createdAt"`
 	IsComplete bool `json:"isComplete"`
+	DueDate *time.Time `json:"dueDate"`
 }
 
 func ListTasks(filename string) ([]Task, error) {
@@ -86,13 +87,19 @@ func ListCompleteTasks(filename string) ([]Task, error) {
     return completedTasks, nil
 }
 
-func AddTask(description string) (bool, error) {
+func AddTask(description string,due_date *time.Time) (bool, error) {
 	tasks,err := ListTasks(FILE_NAME);
+	var due *time.Time
 	if err != nil {
 		fmt.Println("Error reading JSON file:", err)
 		return false, fmt.Errorf("failed to read file: %w", err)
 	}
-	newTask := Task{tasks[len(tasks) - 1].ID + 1,description,time.Now(),false}
+	if(due_date != nil){
+		due = due_date
+	}else{
+		due = nil
+	}
+	newTask := Task{tasks[len(tasks) - 1].ID + 1,description,time.Now(),false,due}
 	tasks = append(tasks,newTask)
 
 	jsonData, err := json.MarshalIndent(tasks, "", "  ")
@@ -102,7 +109,7 @@ func AddTask(description string) (bool, error) {
 		fmt.Println("Error reading JSON file:", err)
 		return false , fmt.Errorf("Error writing to file: %w", err)
 	}
-	return false,nil
+	return true,nil
 }
 
 func DeleteTask(id int)(bool,error){

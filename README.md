@@ -42,7 +42,17 @@ Example:
 $ tasks add "Tidy my desk"
 ```
 
-This creates a new task in the data file.
+Add a new task with description and due date. 
+
+```
+$ tasks add <description> --due <due-date>
+```
+
+Example: 
+
+```
+$ tasks add "Start new go project" --due "23-03-2026" 
+```
 
 ---
 
