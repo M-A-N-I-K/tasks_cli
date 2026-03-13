@@ -178,6 +178,18 @@ Example:
 
 ---
 
+## Task Priority
+
+TODO: Document how task priority will work in the CLI (flags, storage format, and display).
+
+---
+
+## Task Statistics
+
+TODO: Document how task statistics will be calculated and shown (e.g., completed count, pending count, completion rate).
+
+---
+
 ## How to Run
 
 ```
