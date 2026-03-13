@@ -33,16 +33,22 @@ var listTasksCmd = &cobra.Command{
 			fmt.Println("Error listing tasks %w",err)
 		}
 		if all {
-			fmt.Fprintln(w, "ID\tTask\t\tCreatedAt\tStatus")
+			fmt.Fprintln(w, "ID\tTask\t\tCreatedAt\t\tDue Date\tCompleted")
 		}else {
-			fmt.Fprintln(w, "ID\tTask\t\tCreatedAt")
+			fmt.Fprintln(w, "ID\tTask\t\tCreatedAt\t\tDue Date")
 		}
 		for _,todo := range res {
+			var dueDate string
 			createdAt := timediff.TimeDiff(todo.CreatedAt)
+			if todo.DueDate != nil {
+				dueDate =  timediff.TimeDiff(*todo.DueDate)
+			}else{
+				dueDate = "Not Added"
+			}
 			if all {
-				fmt.Fprintf(w,"%d\t%s\t\t%s\t%t\n",todo.ID,todo.Description,createdAt,todo.IsComplete)
+				fmt.Fprintf(w,"%d\t%s\t\t%s\t\t%s\t%t\n",todo.ID,todo.Description,createdAt,dueDate,todo.IsComplete,)
 				}else{
-				fmt.Fprintf(w,"%d\t%s\t\t%s\n",todo.ID,todo.Description,createdAt)
+				fmt.Fprintf(w,"%d\t%s\t\t%s\t\t%s\n",todo.ID,todo.Description,createdAt,dueDate)
 			}
 		}
 		w.Flush()

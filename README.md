@@ -2,7 +2,7 @@
 
 ### Goal
 
-Create a CLI application for managing tasks in the terminal.
+A CLI application for managing tasks in the terminal.
 
 ```
 $ tasks
@@ -67,9 +67,9 @@ $ tasks list
 Example output:
 
 ```
-ID    Task                Created
-1     Tidy my desk        a minute ago
-3     Buy groceries       a few seconds ago
+ID    Task                Created               Due Date
+1     Tidy my desk        a minute ago          Not Added
+3     Buy groceries       a few seconds ago     in 16 days
 ```
 
 Show all completed tasks:
@@ -95,10 +95,10 @@ $ tasks list -a
 Example:
 
 ```
-ID    Task                Created          Status
-1     Tidy my desk        2 minutes ago    false
-2     Write docs          1 minute ago     true
-3     Buy groceries       few sec ago      false
+ID    Task                Created          Due Date     Completed 
+1     Tidy my desk        2 minutes ago    Not Added    false
+2     Write docs          1 minute ago     in 16 days   true
+3     Buy groceries       few sec ago      Not Added    false
 ```
 
 ---
@@ -159,7 +159,8 @@ Example:
     "id": 1,
     "description": "My new task",
     "createdAt": "2024-07-27T16:45:19Z",
-    "isComplete": false
+    "isComplete": false,
+    "dueDate": "2026-03-29T00:00:00Z"
   }
 ]
 ```
